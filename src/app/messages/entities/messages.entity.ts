@@ -1,13 +1,19 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('messages')
+@Entity({name: 'messages'})
 export class PostMessageEntity{
+    @PrimaryGeneratedColumn("uuid")
+    readonly id: number;
+
     @Column()
     readonly title: string;
 
     @Column()
     readonly content: string;
+
+    @Column({type: "timestamptz"})
+    readonly created_at: Date;
 
     constructor(title: string, content: string) {
         this.title = title;
@@ -16,7 +22,6 @@ export class PostMessageEntity{
     }
 }
 
-@Entity('reaction')
 export class PostReactionEntity {
     @Column()
     readonly reaction: string;
@@ -32,7 +37,6 @@ export class PostReactionEntity {
 
 }
 
-@Entity('comment')
 export class PostCommentEntity {
     @Column()
     readonly comment: string;

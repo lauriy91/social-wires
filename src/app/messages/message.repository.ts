@@ -11,7 +11,9 @@ export class MessagesRepository {
   constructor(
     @InjectRepository(PostMessageEntity)
     private messagesRepository: Repository<PostMessageEntity>,
+    @InjectRepository(PostReactionEntity)
     private reactionsRepository: Repository<PostReactionEntity>,
+    @InjectRepository(PostCommentEntity)
     private commentsRepository: Repository<PostCommentEntity>,
     private mapper: MessagesMapper
   ) {}

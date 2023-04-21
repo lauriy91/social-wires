@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('users')
+@Entity({name: 'users'})
 export class UserBaseEntity{
     @PrimaryGeneratedColumn("uuid")
-    readonly userId: string;
+    readonly userId: number;
 
     @Column({
         unique: true
@@ -14,15 +14,23 @@ export class UserBaseEntity{
     @Column()
     readonly password: string;
 
-    // @Column()
-    // readonly created_at: Timestamp;
+    @Column({type: "timestamptz"})
+    readonly created_at: Date;
+
+    // constructor(userId: string, username: string, password: string, created_at: Timestamp) {
+    constructor(userId: number, username: string, password: string) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        // this.created_at = created_at;
+        console.log('Bienvenido ' + this.username);
+    }
 }
 
-@Entity('users')
 export class UserEntity {
 
     @PrimaryGeneratedColumn("uuid")
-    readonly userId: string;
+    readonly userId: number;
 
     @Column({
         unique: true
@@ -40,11 +48,11 @@ export class UserEntity {
     @Column()
     readonly fullname: string;
 
-    // @Column()
-    // readonly created_at: Timestamp;
+    @Column({type: "timestamptz"})
+    readonly created_at: Date;
 
     // constructor(userId: string, username: string, email: string, password: string, fullname: string, created_at: Timestamp) {
-    constructor(userId: string, username: string, email: string, password: string, fullname: string) {
+    constructor(userId: number, username: string, email: string, password: string, fullname: string) {
         this.userId = userId;
         this.username = username;
         this.email = email;

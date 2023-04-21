@@ -25,7 +25,7 @@ export class UserMapper {
 
     entityToDto(userEntity: UserEntity): UserDTO {
         // return new UserDTO(userEntity.userId, userEntity.username, userEntity.email, userEntity.password, userEntity.fullname, userEntity.created_at);
-        return new UserDTO(userEntity.userId, userEntity.username, userEntity.email, userEntity.password, userEntity.fullname);
+        return new UserDTO(userEntity.userId, userEntity.email, userEntity.fullname);
     }
 
 }

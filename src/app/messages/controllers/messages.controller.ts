@@ -122,11 +122,15 @@ export class MessagesController {
 	// @ApiOkResponse({
 	// 	// type: CommentResponse
 	// })
-	// @Patch('comment/:id')
-	// async newComment(@Param('id', ParseIntPipe) id: number) {
-	// 	return await this.messagesService.newComment(id);
+	// // @Patch('comment/:id')
+	// // async newComment2(@Param('id', ParseIntPipe) id: number) {
+	// // 	return await this.messagesService.newComment(id);
+	// // }
+	// @Patch()
+	// async newComment(@Res() res, @Body() data) {
+	// 	this.commentService.addComment(data)
+	// 	res.status(HttpStatus.OK).send("Comment posted successfully")	}
 	// }
-
     
 }
 

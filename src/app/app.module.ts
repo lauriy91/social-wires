@@ -8,7 +8,6 @@ import { CommonModule } from './common/common.module';
 @Module({
   // imports: [AppModule],
   imports: [
-    // ConfigModule.forRoot(), 
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -18,8 +17,8 @@ import { CommonModule } from './common/common.module';
       database: 'nest',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: false,
-      retryDelay: 3000,
-      retryAttempts: 10
+      // retryDelay: 3000,
+      // retryAttempts: 10
     }),
     AuthModule, 
     CommonModule, 
