@@ -17,10 +17,11 @@ export class UserBaseEntity{
     @Column()
     readonly created_at: Timestamp;
 
-    constructor(userId: string, username: string, password: string) {
+    constructor(userId: string, username: string, password: string, created_at: Timestamp) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.created_at = created_at;
         console.log('Bienvenido ' + this.username);
     }
 }
@@ -50,12 +51,13 @@ export class UserEntity {
     @Column()
     readonly created_at: Timestamp;
 
-    constructor(userId: string, username: string, email: string, password: string, fullname: string) {
+    constructor(userId: string, username: string, email: string, password: string, fullname: string, created_at: Timestamp) {
         this.userId = userId;
         this.username = username;
         this.email = email;
         this.password = password;
         this.fullname = fullname;
+        this.created_at = created_at;
         console.log('Bienvenido ' + this.username);
     }
 
