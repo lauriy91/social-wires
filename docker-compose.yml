@@ -4,7 +4,7 @@ services:
   psql-db:
     image: postgres:12
     ports:
-      - ${POSTGRES_PORT_EXTERNAL}:5432
+      - '5431:5432'
     environment:
       - POSTGRES_USER=nest
       - POSTGRES_PASSWORD=nest

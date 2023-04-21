@@ -2,23 +2,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { MessagesModule } from './messages/messages.module';
 import { CommonModule } from './common/common.module';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
-  // imports: [AppModule],
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 5431,
       username: 'nest',
       password: 'nest',
       database: 'nest',
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: false,
-      // retryDelay: 3000,
-      // retryAttempts: 10
+      synchronize: true,
+      retryDelay: 3000,
+      retryAttempts: 10
     }),
     AuthModule, 
     CommonModule, 

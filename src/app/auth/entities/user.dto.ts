@@ -7,7 +7,6 @@ import {
   MaxLength,
   MinLength
 } from "@nestjs/class-validator";
-import { Timestamp } from "typeorm";
 
 export class UserBaseDTO {
   @ApiProperty()
@@ -25,7 +24,7 @@ export class UserBaseDTO {
 
   @ApiProperty()
   @IsDate()
-  readonly created_at?: Timestamp;
+  readonly created_at?: Date;
 
   // constructor(userId: string, username: string, password: string, created_at: Timestamp) {
   constructor(userId: number, username: string, password: string) {

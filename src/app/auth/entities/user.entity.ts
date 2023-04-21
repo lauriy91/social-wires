@@ -48,8 +48,8 @@ export class UserEntity {
     @Column()
     readonly fullname: string;
 
-    @Column({type: "timestamptz"})
-    readonly created_at: Date;
+    // @Column({type: "timestamptz"})
+    // readonly created_at: Date;
 
     // constructor(userId: string, username: string, email: string, password: string, fullname: string, created_at: Timestamp) {
     constructor(userId: number, username: string, email: string, password: string, fullname: string) {

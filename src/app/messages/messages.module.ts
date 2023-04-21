@@ -10,6 +10,8 @@ import {
 } from "@messagesEnts/messages.entity";
 import { MessagesRepository } from "@messagerepositories/message.repository";
 import { MessagesMapper } from "@messagesEnts/messages.mapper";
+import { JwtModule } from "@nestjs/jwt";
+import { jwtConstants } from "@common/constants";
 
 @Module({
   imports: [
@@ -17,7 +19,12 @@ import { MessagesMapper } from "@messagesEnts/messages.mapper";
       PostMessageEntity,
       PostReactionEntity,
       PostCommentEntity
-    ])
+    ]),
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '24h' },
+    }),
   ],
   controllers: [MessagesController],
   providers: [MessagesService, MessagesRepository, MessagesMapper]
