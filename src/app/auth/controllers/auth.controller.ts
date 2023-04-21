@@ -4,6 +4,7 @@ import {
 	ApiForbiddenResponse,
 	ApiInternalServerErrorResponse,
 	ApiOkResponse,
+    ApiCreatedResponse,
 	ApiOperation,
 	ApiTags,
 	ApiUnauthorizedResponse
@@ -11,6 +12,7 @@ import {
 import { Body, Controller, Post } from '@nestjs/common';
 import { UserBaseDTO, UserDTO } from '../entities/user.dto';
 import { ErrorBaseResponse } from 'src/app/common/error.response';
+import { UsersRepository } from '../auth.repository';
 
 @ApiTags('wires')
 @Controller({
@@ -35,21 +37,48 @@ import { ErrorBaseResponse } from 'src/app/common/error.response';
 })
 
 export class AuthController {
+    constructor(private usersRepository: UsersRepository){}
 
     users: UserDTO[] = [];
     userbase: UserBaseDTO[] = [];
 
-    @Post()
-    signup(@Body() user: UserDTO): UserDTO {
-        const signup = {...user, userId: ''+(this.users.length)}
+    @ApiOperation({
+		summary: 'Create users ',
+		description: 'Create users '
+	})
+	@ApiCreatedResponse({
+		// type: PostJobPosting
+	})
+    @Post('signup')
+    async signup(@Body() data: UserDTO) {
+        const signup = {...data, userId: ''+(this.users.length)}
         this.users = [...this.users, signup];
-        return signup;
+        return await signup;
     }
 
-    @Post()
-    signin(@Body() user: UserBaseDTO): UserBaseDTO {
-        const signin = {...user, userId: ''+(this.userbase.length)}
+    @ApiOperation({
+		summary: 'Create users ',
+		description: 'Create users '
+	})
+	@ApiCreatedResponse({
+		// type: PostJobPosting
+	})
+    @Post('signup')
+    async signuptest(@Body() data: UserDTO): Promise<UserDTO> {
+        return await this.usersRepository.newUser(data);
+    }
+
+    @ApiOperation({
+		summary: 'Signin users ',
+		description: 'Signin users '
+	})
+	@ApiCreatedResponse({
+		// type: PostJobPosting
+	})
+    @Post('signin')
+    async signin(@Body() data: UserBaseDTO) {
+        const signin = {...data, userId: ''+(this.userbase.length)}
         this.userbase = [...this.userbase, signin];
-        return signin;
+        return await signin;
     }
 }

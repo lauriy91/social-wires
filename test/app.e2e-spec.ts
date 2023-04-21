@@ -5,6 +5,7 @@ import { UserDTO } from "src/users/user.dto";
 import * as request from "supertest";
 import { AppModule } from "../src/app.module";
 import { UsersModule } from "../src/users/users.module";
+import { TypeORMExceptionFilter } from "src/app/common/typeorm-exceptions.filter";
 
 describe("UsersController (e2e)", () => {
   let app: INestApplication;
@@ -15,6 +16,7 @@ describe("UsersController (e2e)", () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalFilters(new TypeORMExceptionFilter());
     await app.init();
   });
 
