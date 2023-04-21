@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+
+  psql-db:
+    image: postgres:12.1-alpine
+    ports:
+      - ${POSTGRES_PORT_EXTERNAL}:5432
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ws-network
+
+volumes:
+  postgres_data:
+
+networks:
+  ws-network:
