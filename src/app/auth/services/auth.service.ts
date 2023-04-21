@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import { HttpException, Injectable } from "@nestjs/common";
-import { UserBaseDTO, UserDTO } from "@authEnts/user.dto";
+import { UserDTO, UserSigninDTO } from "@authEnts/user.dto";
 import { UserMapper } from "@authEnts/user.mapper";
 import { UsersRepository } from "@authrepositories/auth.repository";
 import { UserEntity } from "@authEnts/user.entity";
@@ -23,28 +23,27 @@ export class UsersService {
     const newUser: UserEntity = await this.usersRepository.newUser(userDTO);
     
     // Encript password
-    const password = userDTO;
+    const {password} = userDTO;
     const plainToHash = await hash(password, 8);
     userDTO = { ...userDTO, password: plainToHash}
 
     // Create user
     return this.mapper.entityToDto(newUser);
-    // return this.usersRepository.save(newUser);
   }
 
   // Signin users with exist users validations
-  async signinUser(userBaseDTO: UserBaseDTO) {
+  async signinUser(userSigninDTO: UserSigninDTO) {
     
     // Verify if the user exist
-    const {username, password} = userBaseDTO;
-    const findUser = await this.usersRepository.signinUser({username});
+    const {password} = userSigninDTO;
+    const findUser = await this.usersRepository.signinUser(userSigninDTO);
     if (!findUser) throw new HttpException('USER NOT FOUND', 404);
     
     // verify if the password is correct
     const checkPassword = await compare(password, findUser.password);
-    if(!checkPassword) throw new HttpException('PASSWORD INCORRECT', 403);
+    if(checkPassword) throw new HttpException('PASSWORD INCORRECT', 403);
     
-    const payload = { id: findUser.userId, username: findUser.username };
+    const payload = { username: findUser.username };
     const token = this.jwtService.sign(payload)
 
     // Signin
@@ -52,7 +51,7 @@ export class UsersService {
       user: findUser,
       token
     };
-    return {data, token};
+    return {data};
   }
 
   // Signin users with exist users validations
@@ -66,7 +65,7 @@ export class UsersService {
     if (user?.password !== password) {
       throw new HttpException('PASSWORD INCORRECT', 403);
     }
-    const payload = { username: user.username, sub: user.userId };
+    const payload = { username: user.username };
 
     // Signin
     return {

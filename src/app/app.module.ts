@@ -14,7 +14,7 @@ import { MessagesModule } from './messages/messages.module';
       username: 'nest',
       password: 'nest',
       database: 'nest',
-      entities: ['dist/**/*.entity{.ts,.js}'],
+      autoLoadEntities: true,
       synchronize: true,
       retryDelay: 3000,
       retryAttempts: 10

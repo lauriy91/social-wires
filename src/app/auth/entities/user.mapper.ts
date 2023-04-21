@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
-import { UserBaseDTO, UserDTO } from "./user.dto";
-import { UserBaseEntity, UserEntity } from "./user.entity";
+import { UserBaseDTO, UserDTO, UserSigninDTO } from "./user.dto";
+import { UserBaseEntity, UserEntity, UserSigninEntity } from "./user.entity";
 
 @Injectable()
 
@@ -13,9 +13,13 @@ export class UserMapper {
         return new UserBaseEntity(userBaseDTO.userId, userBaseDTO.username, userBaseDTO.password);
     }
 
+    dtoToEntitySignin(userSigninDTO: UserSigninDTO): UserSigninEntity {
+        return new UserSigninEntity(userSigninDTO.username, userSigninDTO.password);
+    }
+
     dtoToEntity(userDTO: UserDTO): UserEntity {
         // return new UserEntity(userDTO.userId, userDTO.username, userDTO.email, userDTO.password, userDTO.fullname, userDTO.created_at);
-        return new UserEntity(userDTO.userId, userDTO.username, userDTO.email, userDTO.password, userDTO.fullname);
+        return new UserEntity(userDTO.userId, userDTO.username, userDTO.email, userDTO.password, userDTO.fullname, userDTO.created_at);
     }
 
     entityToDtoBase(userBaseEntity: UserBaseEntity): UserBaseDTO {
@@ -25,7 +29,7 @@ export class UserMapper {
 
     entityToDto(userEntity: UserEntity): UserDTO {
         // return new UserDTO(userEntity.userId, userEntity.username, userEntity.email, userEntity.password, userEntity.fullname, userEntity.created_at);
-        return new UserDTO(userEntity.userId, userEntity.email, userEntity.fullname);
+        return new UserDTO(userEntity.userId, userEntity.email, userEntity.fullname, userEntity.username, userEntity.password, userEntity.created_at);
     }
 
 }

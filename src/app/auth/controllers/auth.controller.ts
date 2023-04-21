@@ -7,20 +7,20 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
   ApiOkResponse,
-  ApiBearerAuth
+//   ApiBearerAuth
 } from "@nestjs/swagger";
 import {
   Body,
   Controller,
   Get,
   Post,
-  UseGuards,
+//   UseGuards,
   Request
 } from "@nestjs/common";
 import { UsersService } from "@authServices/auth.service";
-import { AuthGuard } from "@common/auth.guard";
+// import { AuthGuard } from "@common/auth.guard";
 import { ErrorBaseResponse } from "@common/error.response";
-import { UserBaseDTO, UserDTO } from "@authEnts/user.dto";
+import { UserDTO, UserSigninDTO } from "@authEnts/user.dto";
 import { BaseUserResponse, SigninResponse } from "@authEnts/user.response";
 
 // Paths and version project
@@ -62,8 +62,8 @@ export class AuthController {
   }
 
   // Authentication area
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard)
+//   @ApiBearerAuth()
+//   @UseGuards(AuthGuard)
   @ApiOperation({
     summary: "Signin users ",
     description: "Signin users "
@@ -72,7 +72,7 @@ export class AuthController {
     type: SigninResponse
   })
   @Post("signin")
-  async signin(@Body() data: UserBaseDTO) {
+  async signin(@Body() data: UserSigninDTO) {
     return await this.userService.signinUser(data);
   }
 

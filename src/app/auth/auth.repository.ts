@@ -2,8 +2,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { UserBaseDTO, UserDTO } from "./entities/user.dto";
-import { UserBaseEntity, UserEntity } from "./entities/user.entity";
+import { UserDTO, UserSigninDTO } from "./entities/user.dto";
+import { UserEntity, UserSigninEntity } from "./entities/user.entity";
 import { UserMapper } from "./entities/user.mapper";
 
 @Injectable()
@@ -23,8 +23,8 @@ export class UsersRepository {
     return this.usersRepository.save(newUser);
   }
 
-  signinUser(userBaseDTO: UserBaseDTO): Promise<UserBaseEntity> {
-    const signinUser = this.mapper.dtoToEntityBase(userBaseDTO);
-    return this.usersRepository.save(signinUser);
+  async signinUser(userSigninDTO: UserSigninDTO): Promise<UserSigninEntity> {
+    const signinUser = await this.mapper.dtoToEntityBase(userSigninDTO);
+    return signinUser;
   }
 }
