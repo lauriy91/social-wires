@@ -2,8 +2,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { UserDTO } from "./entities/user.dto";
-import { UserEntity } from "./entities/user.entity";
+import { UserBaseDTO, UserDTO } from "./entities/user.dto";
+import { UserBaseEntity, UserEntity } from "./entities/user.entity";
 import { UserMapper } from "./entities/user.mapper";
 
 @Injectable()
@@ -21,5 +21,10 @@ export class UsersRepository {
   newUser(userDTO: UserDTO): Promise<UserEntity> {
     const newUser = this.mapper.dtoToEntity(userDTO);
     return this.usersRepository.save(newUser);
+  }
+
+  signinUser(userBaseDTO: UserBaseDTO): Promise<UserBaseEntity> {
+    const signinUser = this.mapper.dtoToEntityBase(userBaseDTO);
+    return this.usersRepository.save(signinUser);
   }
 }

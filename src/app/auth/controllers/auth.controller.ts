@@ -3,22 +3,31 @@ import {
 	ApiBadRequestResponse,
 	ApiForbiddenResponse,
 	ApiInternalServerErrorResponse,
-	ApiOkResponse,
-    ApiCreatedResponse,
 	ApiOperation,
 	ApiTags,
-	ApiUnauthorizedResponse
+	ApiUnauthorizedResponse,
+	ApiOkResponse,
+	ApiBearerAuth
 } from '@nestjs/swagger';
-import { Body, Controller, Post } from '@nestjs/common';
-import { UserBaseDTO, UserDTO } from '../entities/user.dto';
-import { ErrorBaseResponse } from 'src/app/common/error.response';
-import { UsersRepository } from '../auth.repository';
+import { Body, Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
+import { UsersService } from '@authServices/auth.service';
+import { AuthGuard } from '@common/auth.guard';
+import { ErrorBaseResponse } from '@common/error.response';
+import { UserBaseDTO, UserDTO } from '@authEnts/user.dto';
+import { BaseUserResponse, SigninResponse } from '@authEnts/user.response';
 
-@ApiTags('wires')
+// Authentication area
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
+
+// Paths and version project
+@ApiTags('wires/auth')
 @Controller({
 	path: 'wires/auth',
 	version: '1'
 })
+
+// Responses
 @ApiUnauthorizedResponse({
 	description: 'Unauthorized',
 	type: ErrorBaseResponse
@@ -37,48 +46,42 @@ import { UsersRepository } from '../auth.repository';
 })
 
 export class AuthController {
-    constructor(private usersRepository: UsersRepository){}
-
-    users: UserDTO[] = [];
-    userbase: UserBaseDTO[] = [];
+    constructor(private userService: UsersService){}
 
     @ApiOperation({
 		summary: 'Create users ',
 		description: 'Create users '
 	})
-	@ApiCreatedResponse({
-		// type: PostJobPosting
+	@ApiOkResponse({
+		type: BaseUserResponse
 	})
     @Post('signup')
-    async signup(@Body() data: UserDTO) {
-        const signup = {...data, userId: ''+(this.users.length)}
-        this.users = [...this.users, signup];
-        return await signup;
-    }
-
-    @ApiOperation({
-		summary: 'Create users ',
-		description: 'Create users '
-	})
-	@ApiCreatedResponse({
-		// type: PostJobPosting
-	})
-    @Post('signup')
-    async signuptest(@Body() data: UserDTO): Promise<UserDTO> {
-        return await this.usersRepository.newUser(data);
+    async signup(@Body() data: UserDTO): Promise<UserDTO> {
+        return await this.userService.newUser(data);
     }
 
     @ApiOperation({
 		summary: 'Signin users ',
 		description: 'Signin users '
 	})
-	@ApiCreatedResponse({
-		// type: PostJobPosting
+	@ApiOkResponse({
+		type: SigninResponse
 	})
     @Post('signin')
     async signin(@Body() data: UserBaseDTO) {
-        const signin = {...data, userId: ''+(this.userbase.length)}
-        this.userbase = [...this.userbase, signin];
-        return await signin;
+        return await this.userService.signinUser(data);
     }
+
+    @ApiOperation({
+		summary: 'Signout users ',
+		description: 'Signout users '
+	})
+	@ApiOkResponse({
+		type: 'The user session has ended'
+	})
+ 	@Get('signout')
+	logout(@Request() req): any {
+	  req.session.destroy();
+	  return { msg: 'The user session has ended' }
+	}
 }

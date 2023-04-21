@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
 export class UserBaseEntity{
@@ -14,16 +14,8 @@ export class UserBaseEntity{
     @Column()
     readonly password: string;
 
-    @Column()
-    readonly created_at: Timestamp;
-
-    constructor(userId: string, username: string, password: string, created_at: Timestamp) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.created_at = created_at;
-        console.log('Bienvenido ' + this.username);
-    }
+    // @Column()
+    // readonly created_at: Timestamp;
 }
 
 @Entity('users')
@@ -48,16 +40,17 @@ export class UserEntity {
     @Column()
     readonly fullname: string;
 
-    @Column()
-    readonly created_at: Timestamp;
+    // @Column()
+    // readonly created_at: Timestamp;
 
-    constructor(userId: string, username: string, email: string, password: string, fullname: string, created_at: Timestamp) {
+    // constructor(userId: string, username: string, email: string, password: string, fullname: string, created_at: Timestamp) {
+    constructor(userId: string, username: string, email: string, password: string, fullname: string) {
         this.userId = userId;
         this.username = username;
         this.email = email;
         this.password = password;
         this.fullname = fullname;
-        this.created_at = created_at;
+        // this.created_at = created_at;
         console.log('Bienvenido ' + this.username);
     }
 

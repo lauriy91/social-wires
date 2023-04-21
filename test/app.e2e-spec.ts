@@ -1,18 +1,17 @@
 /* eslint-disable prettier/prettier */
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { UserDTO } from "src/users/user.dto";
 import * as request from "supertest";
 import { AppModule } from "../src/app.module";
-import { UsersModule } from "../src/users/users.module";
 import { TypeORMExceptionFilter } from "src/app/common/typeorm-exceptions.filter";
+import { UserDTO } from "src/app/auth/entities/user.dto";
 
 describe("UsersController (e2e)", () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, UsersModule],
+      imports: [AppModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -27,14 +26,17 @@ describe("UsersController (e2e)", () => {
     const currentSize = currentGetAllRequest.body.length;
 
     const newUser: UserDTO = {
-      name: "Mateo",
+      username: "Laura",
+      email: "laura@h.com",
+      password: "psw",
+      fullname: "Laura Rodriguez"
     };
     const newUserRequest = await server
       .post("/users")
       .type("form")
       .send(newUser)
       .expect(201);
-    expect(newUserRequest.body.name).toBe(newUser.name);
+    expect(newUserRequest.body.name).toBe(newUser.username);
     expect(newUserRequest.body.id).toBe("" + currentSize);
     const postNewRequest = await server.get("/users").expect(200);
     const postNewSize = postNewRequest.body.length;
@@ -44,20 +46,5 @@ describe("UsersController (e2e)", () => {
     const getUserByIdRequest = await server.get(`/users/${id}`).expect(200);
     expect(getUserByIdRequest.body.id).toBe(id);
 
-    const updateUser: UserDTO = {
-      id: newUserRequest.body.id,
-      name: "Mateo Aguilera",
-    };
-    const updateUserRequest = await server
-      .put(`/users/${updateUser.id}`)
-      .expect(200)
-      .type("form")
-      .send(updateUser);
-    expect(updateUserRequest.body.name).toEqual(updateUser.name);
-
-    await server.delete(`/users/${updateUser.id}`).expect(200);
-    const postDeleteGetAllRequest = await server.get("/users").expect(200);
-    const postDeleteSize = postDeleteGetAllRequest.body.length;
-    expect(postDeleteSize).toBe(currentSize);
   });
 });

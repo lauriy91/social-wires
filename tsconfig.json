@@ -16,6 +16,20 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+			"@authrepositories/*": ["src/app/auth/*"],
+			"@messagerepositories/*": ["src/app/messages/*"],
+			"@responses/*": ["src/api/responses/*"],
+			"@common/*": ["src/app/common/*"],
+			"@authEnts/*": ["src/app/auth/entities/*"],
+			"@authController/*": ["src/app/auth/controllers/*"],
+			"@authServices/*": ["src/app/auth/services/*"],
+      "@messagesEnts/*": ["src/app/messages/entities/*"],
+			"@messagesController/*": ["src/app/messages/controllers/*"],
+			"@messagesServices/*": ["src/app/messages/services/*"],
+			"@external/*": ["src/infraestructure/external/*"],
+			"@dto/*": ["src/api/dto/*"]
+		}
   }
 }

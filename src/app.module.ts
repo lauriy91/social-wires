@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './app/auth/auth.module';
 import { CommonModule } from './app/common/common.module';
 import { MessagesModule } from './app/messages/messages.module';
-import { UsersModule } from './users/users.module';
 
 @Module({
   // imports: [AppModule],
@@ -12,20 +11,19 @@ import { UsersModule } from './users/users.module';
     // ConfigModule.forRoot(), 
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME,
-      autoLoadEntities: true,
-      synchronize: !!process.env.DB_SYNC,
+      host: 'localhost',
+      port: 5432,
+      username: 'nest',
+      password: 'nest',
+      database: 'nest',
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      synchronize: false,
       retryDelay: 3000,
       retryAttempts: 10
     }),
     AuthModule, 
     CommonModule, 
     MessagesModule, 
-    UsersModule
   ],
   controllers: [],
   providers: [],

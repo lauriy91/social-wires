@@ -1,15 +1,22 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthController } from './controllers/auth.controller';
-import { UserEntity } from './entities/user.entity';
-import { UserMapper } from './entities/user.mapper';
-import { UsersRepository } from './auth.repository';
-import { UsersService } from './services/auth.service';
+import { AuthController } from '@authController/auth.controller';
+import { UserEntity } from '@authEnts/user.entity';
+import { UserMapper } from '@authEnts/user.mapper';
+import { UsersRepository } from '@authrepositories/auth.repository';
+import { UsersService } from '@authServices/auth.service';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from '@common/constants';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserEntity])
+    TypeOrmModule.forFeature([UserEntity]),
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '24h' },
+    }),
   ],
   controllers: [AuthController],
   providers: [UsersService, UserMapper, UsersRepository],

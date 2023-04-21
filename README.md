@@ -1,73 +1,88 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<h1>SOCIAL WIRES</h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<p>Sharing messages and social interactions with NestJs in the Backend and Postgres in the Database amongst other libreries and frameworks.</p>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<h1> THING THAT YOU CAN DO: </h1>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+<h2> Create a account, login and logout... </h2>
 
-```bash
-$ npm install
-```
+<h> Create a profile... </h>
 
-## Running the app
+[![profile.png](https://i.postimg.cc/3Rtr27G3/profile.png)](https://postimg.cc/Vrbccx4h)
 
-```bash
+<h> Login... </h>
+
+[![profile.png](https://i.postimg.cc/3Rtr27G3/profile.png)](https://postimg.cc/Vrbccx4h)
+
+<h> Logout... </h>
+
+[![profile.png](https://i.postimg.cc/3Rtr27G3/profile.png)](https://postimg.cc/Vrbccx4h)
+
+<h2> Interact with the feed... </h2>
+
+[![postit.png](https://i.postimg.cc/br2XdjHC/postit.png)](https://postimg.cc/7JDtQdR0)
+
+<h2> Likes, comments and more... </h2>
+
+<h1>Enviroment Variables</h1>
+
+<li>POSTGRES_PORT_EXTERNAL=****</li>
+<li>DB_USER=****</li>
+<li>DB_PASS=****</li>
+<li>DB_NAME=****</li>
+<li>DB_HOST=localhost</li>
+<li>DB_PORT=5431</li>
+<li>DB_SYNC=false</li>
+
+<h1>Installation and project run</h1>
+
+<li>npm install --save @nestjs/swagger swagger-ui-express</li>
+<li>npx nest generate module auth</li>
+<li>npx nest generate module messages</li>
+<li>npx nest generate module common</li>
+<li>https://docs.docker.com/desktop/install/windows-install/</li>
+<li>docker-compose up -d</li>
+<li>docker-compose ps</li>
+<li>npm install --save @nestjs/typeorm typeorm pg</li>
+<li>npm run verify</li>
+<li>git clone https://github.com/lauriy91/social-wires.git</li>
+<li>cd SOCIAL-NETWORKS</li>
+<li>npm install</li>
+
+<h1>Running the app</h1>
 # development
-$ npm run start
-
+<li>npm run start</li>
 # watch mode
-$ npm run start:dev
-
+<li>npm run start:dev</li>
 # production mode
-$ npm run start:prod
-```
+<li>npm run start:prod</li>
 
-## Test
-
-```bash
+<h1>Test</h1>
 # unit tests
-$ npm run test
-
+<li>npm run test</li>
 # e2e tests
-$ npm run test:e2e
-
+<li>npm run test:e2e</li>
 # test coverage
-$ npm run test:cov
-```
+<li>npm run test:cov</li>
 
-## Support
+<h1>Testing Tools Api</h1>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<label>Postman</label>
+<label>Swagger</label>
 
-## Stay in touch
+<li>POST</li>
+<li>GET</li>
+<li>PATH</li>
+<li>DELETE</li>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<h1>Support</h1>
 
-## License
+<li>Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).</li>
 
-Nest is [MIT licensed](LICENSE).
+<h1>Stay in touch</h1>
+<h2>Laura Rodriguez King (https://github.com/lauriy91)</h2>
+
+<h1>License</h1>
+<li>Nest is [MIT licensed](LICENSE).</li>
