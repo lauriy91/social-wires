@@ -3,10 +3,10 @@
 <p>Sharing messages and social interactions with NestJs in the Backend and Postgres in the Database amongst other libreries and frameworks.</p>
 
 
-<h1> THING THAT YOU CAN DO: </h1>
+<h1> THINGS YOU CAN DO: </h1>
 
 
-<h2> Create a account, login and logout... </h2>
+<h2> Create an account, login and logout... </h2>
 
 <h> Create a profile... </h>
 
@@ -24,6 +24,8 @@
 
 [![title.png](https://i.postimg.cc/Xvfb7SZk/title.png)](https://postimg.cc/f3RFBPfV)
 
+[![getmessages.png](https://i.postimg.cc/bdcgvMS1/getmessages.png)](https://postimg.cc/D46Ljxgz)
+
 <h2> Likes, comments and more... </h2>
 
 <h1>Enviroment Variables</h1>
@@ -36,7 +38,7 @@
 <li>DB_PORT=5431</li>
 <li>DB_SYNC=false</li>
 
-<h1>Installation and project run</h1>
+<h1>Installing and running</h1>
 
 <li>npm install --save @nestjs/swagger swagger-ui-express</li>
 <li>npx nest generate module auth</li>
@@ -58,6 +60,8 @@
 <li>npm run start:dev</li>
 # production mode
 <li>npm run start:prod</li>
+# test swagger mode
+<li>http://localhost:3000/api</li>
 
 <h1>Test</h1>
 # unit tests
@@ -70,6 +74,7 @@
 <h1>Testing Tools Api</h1>
 
 <label>Postman</label>
+<label>&</label>
 <label>Swagger</label>
 
 <li>POST</li>
