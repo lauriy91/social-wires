@@ -22,7 +22,6 @@ import { UsersService } from "@authServices/auth.service";
 import { ErrorBaseResponse } from "@common/error.response";
 import { SignupDTO, UserSigninDTO } from "@authEnts/user.dto";
 import {
-  BaseUserResponse,
   SigninResponse,
   SignupResponse,
   UsersResponse
@@ -61,7 +60,7 @@ export class AuthController {
     description: "Create users "
   })
   @ApiOkResponse({
-    type: BaseUserResponse
+    type: SignupResponse
   })
   @Post("signup")
   async signup(@Body() data: SignupDTO): Promise<SignupResponse> {
