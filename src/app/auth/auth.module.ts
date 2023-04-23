@@ -2,7 +2,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from '@authController/auth.controller';
-import { UserBaseEntity, UserEntity } from '@authEnts/user.entity';
+import { SignupEntity, UserBaseEntity, UserEntity, UserSigninEntity } from '@authEnts/user.entity';
 import { UserMapper } from '@authEnts/user.mapper';
 import { UsersRepository } from '@authrepositories/auth.repository';
 import { UsersService } from '@authServices/auth.service';
@@ -11,7 +11,7 @@ import { jwtConstants } from '@common/constants';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserBaseEntity, UserEntity ]),
+    TypeOrmModule.forFeature([UserBaseEntity, UserEntity, SignupEntity, UserSigninEntity ]),
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,

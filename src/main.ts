@@ -8,8 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new TypeORMExceptionFilter());
   const options = new DocumentBuilder()
-    .setTitle('Nest Workshop')
-    .setDescription('Nest Workshop')
+    .setTitle('Social Wires')
+    .setDescription('Social Network')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
