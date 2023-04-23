@@ -10,20 +10,19 @@
 
 <h> Create a profile... </h>
 
-[![signup.png](https://i.postimg.cc/cHn54sgD/signup.png)](https://postimg.cc/5YfmsWmv)
+[![signup.png](https://i.postimg.cc/15TjNCwn/signup.png)](https://postimg.cc/xcvRwPsn)
 
 <h> Login... </h>
 
-[![signin.png](https://i.postimg.cc/ZqW2QkmL/signin.png)](https://postimg.cc/LqMxqbnq)
+[![signin.png](https://i.postimg.cc/Kc17gZNf/signin.png)](https://postimg.cc/9zjw6Hsw)
 
 <h> Get users (For admin)... </h>
 
-[![getusers.png](https://i.postimg.cc/XJnq8vfh/getusers.png)](https://postimg.cc/TyHT2fHq)
-[![getusers.png](https://i.postimg.cc/XJnq8vfh/getusers.png)](https://postimg.cc/TyHT2fHq)
+[![getusers.png](https://i.postimg.cc/FKJmLkYm/getusers.png)](https://postimg.cc/1gPLxt0Y)
 
 <h2> Interact with the feed... </h2>
 
-[![postit.png](https://i.postimg.cc/br2XdjHC/postit.png)](https://postimg.cc/7JDtQdR0)
+[![title.png](https://i.postimg.cc/Xvfb7SZk/title.png)](https://postimg.cc/f3RFBPfV)
 
 <h2> Likes, comments and more... </h2>
 

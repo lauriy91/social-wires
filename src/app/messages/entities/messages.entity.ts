@@ -12,13 +12,12 @@ export class PostMessageEntity{
     @Column()
     readonly content: string;
 
-    @Column({type: "timestamptz"})
-    readonly created_at: Date;
+    // @Column({type: "timestamptz"})
+    // readonly created_at: Date;
 
     constructor(title: string, content: string) {
         this.title = title;
         this.content = content;
-        console.log('Titulo: ' + this.title);
     }
 }
 
@@ -32,7 +31,6 @@ export class PostReactionEntity {
     constructor(reaction: string, author: string) {
         this.reaction = reaction;
         this.author = author;
-        console.log('its cool ' + this.author);
     }
 
 }
@@ -47,7 +45,6 @@ export class PostCommentEntity {
     constructor(comment: string, author: string) {
         this.comment = comment;
         this.author = author;
-        console.log('its cool ' + this.author);
     }
 
 }

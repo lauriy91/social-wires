@@ -16,8 +16,8 @@ import { MessagesService } from '@messagesServices/messages.service';
 import { AuthGuard } from '@common/auth.guard';
 import { BaseMessagesResponse, MessageCreateResponse, MessagesDeletedResponse } from '@messagesEnts/messages.response';
 
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
+// @ApiBearerAuth()
+// @UseGuards(AuthGuard)
 @ApiTags('wires/messages')
 @Controller({
 	path: 'wires/messages',
@@ -48,7 +48,7 @@ export class MessagesController {
 		description: 'Create messages '
 	})
 	@ApiOkResponse({
-		type: MessageCreateResponse
+		type: PostMessageDTO
 	})
     @Post()
     async postMessages(@Body() data: PostMessageDTO): Promise<PostMessageDTO> {
