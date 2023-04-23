@@ -6,22 +6,27 @@ import {
   ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
-  ApiOkResponse,
-//   ApiBearerAuth
+  ApiOkResponse
+  //   ApiBearerAuth
 } from "@nestjs/swagger";
 import {
   Body,
   Controller,
   Get,
   Post,
-//   UseGuards,
+  //   UseGuards,
   Request
 } from "@nestjs/common";
 import { UsersService } from "@authServices/auth.service";
 // import { AuthGuard } from "@common/auth.guard";
 import { ErrorBaseResponse } from "@common/error.response";
-import { UserDTO, UserSigninDTO } from "@authEnts/user.dto";
-import { BaseUserResponse, SigninResponse } from "@authEnts/user.response";
+import { SignupDTO, UserSigninDTO } from "@authEnts/user.dto";
+import {
+  BaseUserResponse,
+  SigninResponse,
+  SignupResponse,
+  UsersResponse
+} from "@authEnts/user.response";
 
 // Paths and version project
 @ApiTags("wires/auth")
@@ -29,7 +34,7 @@ import { BaseUserResponse, SigninResponse } from "@authEnts/user.response";
   path: "wires/auth",
   version: "1"
 })
-// Responses
+// Erros responses
 @ApiUnauthorizedResponse({
   description: "Unauthorized",
   type: ErrorBaseResponse
@@ -46,6 +51,8 @@ import { BaseUserResponse, SigninResponse } from "@authEnts/user.response";
   description: "Internal Server Error",
   type: ErrorBaseResponse
 })
+
+// User Controller
 export class AuthController {
   constructor(private userService: UsersService) {}
 
@@ -57,13 +64,13 @@ export class AuthController {
     type: BaseUserResponse
   })
   @Post("signup")
-  async signup(@Body() data: UserDTO): Promise<UserDTO> {
+  async signup(@Body() data: SignupDTO): Promise<SignupResponse> {
     return await this.userService.newUser(data);
   }
 
   // Authentication area
-//   @ApiBearerAuth()
-//   @UseGuards(AuthGuard)
+  //   @ApiBearerAuth()
+  //   @UseGuards(AuthGuard)
   @ApiOperation({
     summary: "Signin users ",
     description: "Signin users "
@@ -72,7 +79,7 @@ export class AuthController {
     type: SigninResponse
   })
   @Post("signin")
-  async signin(@Body() data: UserSigninDTO) {
+  async signin(@Body() data: UserSigninDTO): Promise<SigninResponse> {
     return await this.userService.signinUser(data);
   }
 
@@ -87,5 +94,17 @@ export class AuthController {
   logout(@Request() req): any {
     req.session.destroy();
     return { msg: "The user session has ended" };
+  }
+
+  @ApiOperation({
+    summary: "Return all users registers ",
+    description: "Return all users registers "
+  })
+  @ApiOkResponse({
+    type: UsersResponse
+  })
+  @Get()
+  async getAllUsers(): Promise<UsersResponse[]> {
+    return await this.userService.users();
   }
 }

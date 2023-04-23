@@ -15,16 +15,41 @@ export class BaseUserResponse {
   fullname: string;
 }
 
+export class SignupResponse {
+  @ApiProperty()
+  userId: number;
+
+  @ApiProperty()
+  username: string;
+
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  fullname: string;
+}
+
 export class SigninResponse {
   @ApiProperty()
   access_token: string;
 
   @ApiProperty()
-  expires_in: number;
+  expires_in: any;
 
   @ApiProperty()
   message: string;
 
   @ApiProperty()
   status: boolean;
+}
+
+export class UsersResponse {
+  @ApiProperty()
+  userId?: number;
+
+  @ApiProperty()
+  username: string;
+
+  @ApiProperty()
+  email: string;
 }
