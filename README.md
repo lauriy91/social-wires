@@ -19,8 +19,7 @@
 
 <h> Get users (For admin)... </h>
 
-[![getusers.png](https://i.postimg.cc/XJnq8vfh/getusers.png)](https://postimg.cc/TyHT2fHq)
-[![getusers.png](https://i.postimg.cc/XJnq8vfh/getusers.png)](https://postimg.cc/TyHT2fHq)
+[![getusers.png](https://i.postimg.cc/FKJmLkYm/getusers.png)](https://postimg.cc/1gPLxt0Y)
 
 <h2> Interact with the feed... </h2>
 
