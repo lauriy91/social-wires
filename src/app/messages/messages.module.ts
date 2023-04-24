@@ -7,11 +7,11 @@ import {
   PostCommentEntity,
   PostMessageEntity,
   PostReactionEntity
-} from "@messagesEnts/messages.entity";
-import { MessagesRepository } from "@messagerepositories/message.repository";
-import { MessagesMapper } from "@messagesEnts/messages.mapper";
+} from "@messagerepositories/parameters/messages.entity";
+import { MessagesRepository } from "@messagerepositories/repositories/message.repository";
+import { MessagesMapper } from "@messagerepositories/parameters/messages.mapper";
 import { JwtModule } from "@nestjs/jwt";
-import { jwtConstants } from "@common/constants";
+import { jwtConstants } from "@common/security/constants";
 
 @Module({
   imports: [

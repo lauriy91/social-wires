@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { SignupDTO, UserSigninDTO } from "@authEnts/user.dto";
-import { SignupEntity } from "@authEnts/user.entity";
-import { UserMapper } from "@authEnts/user.mapper";
-import { UsersRepository } from "@authrepositories/auth.repository";
+import { SignupDTO, UserSigninDTO } from "@authrepositories/parameters/user.dto";
+import { SignupEntity } from "@authrepositories/parameters/user.entity";
+import { UserMapper } from "@authrepositories/parameters/user.mapper";
+import { UsersRepository } from "@authrepositories/repositories/auth.repository";
 import {
   SigninResponse,
   SignupResponse
-} from "@authrepositories/entities/user.response";
+} from "@authrepositories/parameters/user.response";
 import { HttpException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { compare, hash } from "bcrypt";
@@ -30,8 +30,9 @@ export class UsersService {
     userDTO = { ...userDTO, password: plainToHash };
 
     // Create user
-    return this.mapper.entitySigninToDto(newUser);
+    return this.mapper.entitySignupToDto(newUser);
   }
+  // End region Create new users
 
   // Signin users with exist users validations
   async signinUser(userSigninDTO: UserSigninDTO): Promise<SigninResponse> {
@@ -55,29 +56,12 @@ export class UsersService {
       status: true
     };
   }
+  // End region login users
 
-  // Signin users with exist users validations
-  async signIn(username, password) {
-    // Verify if the user exist
-    const user = await this.usersRepository.signinUser(username);
-    if (!user) throw new HttpException("USER NOT FOUND", 404);
-
-    // verify if the password is correct
-    if (user?.password !== password) {
-      throw new HttpException("PASSWORD INCORRECT", 403);
-    }
-    const payload = { username: user.username };
-
-    // Signin
-    return {
-      access_token: await this.jwtService.signAsync(payload)
-    };
-  }
-
-  // Users registered in the app
+  // Get users registered in the app
   async users() {
-    // get users from repositories
     const users = await this.usersRepository.getAllUsers();
     return users;
   }
+  // End region get all users
 }

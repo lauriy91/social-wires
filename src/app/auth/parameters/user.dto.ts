@@ -30,7 +30,7 @@ export class UserBaseDTO {
 export class UserSigninDTO {
   @ApiProperty()
   @MinLength(3)
-  readonly username: string;
+  username: string;
 
   @ApiProperty()
   @MinLength(5)
@@ -45,19 +45,19 @@ export class UserSigninDTO {
 
 export class UserDTO extends UserBaseDTO {
   @ApiProperty()
+  readonly userId?: number;
+
+  @ApiProperty()
+  @MinLength(3)
+  readonly username: string;
+
+  @ApiProperty()
   @IsEmail()
   readonly email: string;
 
   @ApiProperty()
   @MinLength(3)
   readonly fullname: string;
-
-  @ApiProperty()
-  readonly userId?: number;
-
-  @ApiProperty()
-  @MinLength(3)
-  readonly username: string;
 
   @ApiProperty()
   @MinLength(5)
@@ -88,19 +88,19 @@ export class UserDTO extends UserBaseDTO {
 
 export class SignupDTO {
   @ApiProperty()
+  readonly userId: number;
+
+  @ApiProperty()
+  @MinLength(3)
+  readonly username: string;
+
+  @ApiProperty()
   @IsEmail()
   readonly email: string;
 
   @ApiProperty()
   @MinLength(3)
   readonly fullname: string;
-
-  @ApiProperty()
-  readonly userId: number;
-
-  @ApiProperty()
-  @MinLength(3)
-  readonly username: string;
 
   @ApiProperty()
   @MinLength(5)

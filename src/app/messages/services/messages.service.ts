@@ -1,23 +1,23 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from "@nestjs/common";
-import { MessagesRepository } from "@messagerepositories/message.repository";
-import { MessagesMapper } from "@messagesEnts/messages.mapper";
 import {
-  PostMessageEntity,
-  PostReactionEntity,
-  PostCommentEntity
-} from "@messagesEnts/messages.entity";
-import {
+  PostCommentDTO,
   PostMessageDTO,
   PostReactionDTO,
-  PostCommentDTO
-} from "@messagesEnts/message.dto";
-// import { Component } from '@nestjs/common';
-
+} from "@messagerepositories/parameters/message.dto";
+import {
+  PostCommentEntity,
+  PostMessageEntity,
+  PostReactionEntity
+} from "@messagerepositories/parameters/messages.entity";
+import { MessagesMapper } from "@messagerepositories/parameters/messages.mapper";
+import {
+  BaseMessagesResponse,
+  MessagesDeletedResponse
+} from "@messagerepositories/parameters/messages.response";
+import { MessagesRepository } from "@messagerepositories/repositories/message.repository";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
-// @Component()
-// const Sentiment = require('sentiment');
 export class MessagesService {
   constructor(
     private messagesRepository: MessagesRepository,
@@ -26,62 +26,57 @@ export class MessagesService {
     private mapper: MessagesMapper
   ) {}
 
-  async newMessage(postMessageDTO: PostMessageDTO): Promise<PostMessageDTO> {
-    const newMessage: PostMessageEntity = await this.messagesRepository.newMessage(postMessageDTO);
+  // Create new messages method
+  async newMessage(
+    postMessageDTO: PostMessageDTO
+  ): Promise<BaseMessagesResponse> {
+    const newMessage: PostMessageEntity =
+      await this.messagesRepository.newMessage(postMessageDTO);
     return this.mapper.entityToDtoMessage(newMessage);
   }
 
-  async getAllMessage(): Promise<PostMessageDTO[]> {
-    const messages: PostMessageEntity[] = await this.messagesRepository.getAllMessage();
+  // Get all messages registereds method
+  async getAllMessage(): Promise<BaseMessagesResponse[]> {
+    const messages: PostMessageEntity[] =
+      await this.messagesRepository.getAllMessage();
     return messages.map((message) => this.mapper.entityToDtoMessage(message));
   }
 
-  async getMyMessage(me: string): Promise<PostMessageDTO> {
-    const messages: PostMessageEntity[] = await this.messagesRepository.getMyMessage(me);
-    return this.mapper.entityToDtoMessage(messages[me]);
-    // return this.mapper.entityToDtoMessage(user => user.username === username);
+  // Get my messages method
+  async getMyMessage(user: string) {
+    const message = await this.messagesRepository.getMessageById(user);
+    return message;
   }
 
-  async getMessageById(id: string): Promise<PostMessageDTO> {
-    const message: PostMessageEntity = await this.messagesRepository.getMessageById(id);
-    return this.mapper.entityToDtoMessage(message);
+  // Get messages by id method
+  async getMessageById(id: string) {
+    const message = await this.messagesRepository.getMessageById(id);
+    return message;
   }
 
-  async deleteMessages(id: string): Promise<void> {
+  // Delete messages by id method
+  async deleteMessages(id: string): Promise<MessagesDeletedResponse> {
     await this.messagesRepository.deleteMessages(id);
+    return { delete: true, status: "OK" };
   }
 
-  async newReaction(postReactionDTO: PostReactionDTO): Promise<PostReactionDTO> {
-    const newReaction: PostReactionEntity = await this.reactionsRepository.newReaction(postReactionDTO);
+  // Make reactions method
+  async newReaction(
+    id: string,
+    postReactionDTO: PostReactionDTO
+  ): Promise<PostReactionEntity> {
+    const newReaction: PostReactionEntity =
+      await this.reactionsRepository.newReaction(id, postReactionDTO);
     return this.mapper.entityToDtoReaction(newReaction);
   }
 
-  async newComment(postCommentDTO: PostCommentDTO): Promise<PostCommentDTO> {
-    const newComment: PostCommentEntity = await this.commentsRepository.newComment(postCommentDTO);
+  // Make comments method
+  async newComment(
+    id: string,
+    postCommentDTO: PostCommentDTO
+  ): Promise<PostCommentDTO> {
+    const newComment: PostCommentEntity =
+      await this.commentsRepository.newComment(id, postCommentDTO);
     return this.mapper.entityToDtoComment(newComment);
   }
-
-
-
-
-    // addComment(data) {
-    //     const Pusher = require('pusher');
-    //     const sentiment = new Sentiment();
-    //     const sentimentScore = sentiment.analyze(data.comment).score;
-
-    //     const payload = {
-    //         message: data.comment,
-    //         sentiment: sentimentScore
-    //     }
-
-    //     var pusher = new Pusher({
-    //         appId: 'YOUR_APP_ID',
-    //         key: 'YOUR_API_KEY',
-    //         secret: 'YOUR_SECRET_KEY',
-    //         cluster: 'CLUSTER',
-    //         encrypted: true
-    //       });
-
-    //       pusher.trigger('comments', 'new-comment', payload);
-    // }
 }

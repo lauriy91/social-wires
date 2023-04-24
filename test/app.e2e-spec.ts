@@ -3,8 +3,8 @@ import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
 import { AppModule } from "../src/app.module";
-import { TypeORMExceptionFilter } from "src/app/common/typeorm-exceptions.filter";
-import { UserDTO } from "src/app/auth/entities/user.dto";
+import { TypeORMExceptionFilter } from "@common/exception/typeorm-exceptions.filter";
+import { UserDTO } from "@authrepositories/parameters/user.dto";
 
 describe("UsersController (e2e)", () => {
   let app: INestApplication;

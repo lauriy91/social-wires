@@ -1,31 +1,32 @@
 /* eslint-disable prettier/prettier */
+import { SignupDTO, UserSigninDTO } from "@authrepositories/parameters/user.dto";
 import {
-  ApiBadRequestResponse,
-  ApiForbiddenResponse,
-  ApiInternalServerErrorResponse,
-  ApiOperation,
-  ApiTags,
-  ApiUnauthorizedResponse,
-  ApiOkResponse
-  //   ApiBearerAuth
-} from "@nestjs/swagger";
+  LogoutResponse,
+  SigninResponse,
+  SignupResponse,
+  UsersResponse
+} from "@authrepositories/parameters/user.response";
+import { UsersService } from "@authServices/auth.service";
+import { AuthGuard } from "@common/security/auth.guard";
+import { ErrorBaseResponse } from "@common/exception/error.response";
 import {
   Body,
   Controller,
   Get,
   Post,
-  //   UseGuards,
-  Request
+  Request,
+  UseGuards
 } from "@nestjs/common";
-import { UsersService } from "@authServices/auth.service";
-// import { AuthGuard } from "@common/auth.guard";
-import { ErrorBaseResponse } from "@common/error.response";
-import { SignupDTO, UserSigninDTO } from "@authEnts/user.dto";
 import {
-  SigninResponse,
-  SignupResponse,
-  UsersResponse
-} from "@authEnts/user.response";
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiForbiddenResponse,
+  ApiInternalServerErrorResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+  ApiUnauthorizedResponse
+} from "@nestjs/swagger";
 
 // Paths and version project
 @ApiTags("wires/auth")
@@ -33,7 +34,7 @@ import {
   path: "wires/auth",
   version: "1"
 })
-// Erros responses
+// Errors responses
 @ApiUnauthorizedResponse({
   description: "Unauthorized",
   type: ErrorBaseResponse
@@ -68,8 +69,8 @@ export class AuthController {
   }
 
   // Authentication area
-  //   @ApiBearerAuth()
-  //   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: "Signin users ",
     description: "Signin users "
@@ -83,15 +84,15 @@ export class AuthController {
   }
 
   @ApiOperation({
-    summary: "Signout users ",
-    description: "Signout users "
+    summary: "Logout users ",
+    description: "Logout users "
   })
   @ApiOkResponse({
-    type: "The user session has ended"
+    type: LogoutResponse
   })
   @Get("signout")
-  logout(@Request() req): any {
-    req.session.destroy();
+  async logout(@Request() req) {
+    req.destroy();
     return { msg: "The user session has ended" };
   }
 

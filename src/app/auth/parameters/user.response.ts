@@ -43,6 +43,11 @@ export class SigninResponse {
   status: boolean;
 }
 
+export class LogoutResponse {
+  @ApiProperty()
+  message: string;
+}
+
 export class UsersResponse {
   @ApiProperty()
   userId?: number;

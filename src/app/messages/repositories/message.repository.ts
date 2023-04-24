@@ -2,9 +2,17 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeleteResult, Repository } from "typeorm";
-import { MessagesMapper } from "./entities/messages.mapper";
-import { PostCommentEntity, PostMessageEntity, PostReactionEntity } from "./entities/messages.entity";
-import { PostCommentDTO, PostMessageDTO, PostReactionDTO } from "./entities/message.dto";
+import {
+  PostCommentDTO,
+  PostMessageDTO,
+  PostReactionDTO
+} from "../parameters/message.dto";
+import {
+  PostCommentEntity,
+  PostMessageEntity,
+  PostReactionEntity
+} from "../parameters/messages.entity";
+import { MessagesMapper } from "../parameters/messages.mapper";
 
 @Injectable()
 export class MessagesRepository {
@@ -18,35 +26,50 @@ export class MessagesRepository {
     private mapper: MessagesMapper
   ) {}
 
+  //  Save new messages on db
   newMessage(postMessageDTO: PostMessageDTO): Promise<PostMessageEntity> {
     const newMessage = this.mapper.dtoToEntityMessage(postMessageDTO);
     return this.messagesRepository.save(newMessage);
   }
 
+  // Extract all messages of db
   getAllMessage(): Promise<PostMessageEntity[]> {
     return this.messagesRepository.find();
   }
 
+  // Extract my messages of db
   getMyMessage(me: any): Promise<PostMessageEntity[]> {
     return this.messagesRepository.find(me);
   }
 
-  getMessageById(id: any): Promise<PostMessageEntity> {
-    return this.messagesRepository.findOne(id);
+  // Extract all messages by id of db
+  async getMessageById(id: string) {
+    const message = await this.messagesRepository.findOneBy({ id });
+    return message;
   }
 
-  deleteMessages(id: any): Promise<DeleteResult> {
+  // Delete messages of db
+  deleteMessages(id: string): Promise<DeleteResult> {
     return this.messagesRepository.delete(id);
   }
 
-  newReaction(postReactionDTO: PostReactionDTO): Promise<PostReactionEntity> {
-    const newReaction = this.mapper.dtoToEntityReaction(postReactionDTO);
+  // Save reactions
+  async newReaction(
+    id: string,
+    postReactionDTO: PostReactionDTO
+  ): Promise<PostReactionEntity> {
+    postReactionDTO.user = id;
+    const newReaction = await this.mapper.dtoToEntityReaction(postReactionDTO);
     return this.reactionsRepository.save(newReaction);
   }
 
-  newComment(postCommentDTO: PostCommentDTO): Promise<PostCommentEntity> {
-    const newComment = this.mapper.dtoToEntityComment(postCommentDTO);
+  // Save comments
+  async newComment(
+    id: string,
+    postCommentDTO: PostCommentDTO
+  ): Promise<PostCommentEntity> {
+    postCommentDTO.user = id;
+    const newComment = await this.mapper.dtoToEntityComment(postCommentDTO);
     return this.commentsRepository.save(newComment);
   }
-
 }

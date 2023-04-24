@@ -2,12 +2,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from '@authController/auth.controller';
-import { SignupEntity, UserBaseEntity, UserEntity, UserSigninEntity } from '@authEnts/user.entity';
-import { UserMapper } from '@authEnts/user.mapper';
-import { UsersRepository } from '@authrepositories/auth.repository';
+import { SignupEntity, UserBaseEntity, UserEntity, UserSigninEntity } from '@authrepositories/parameters/user.entity';
+import { UserMapper } from '@authrepositories/parameters/user.mapper';
+import { UsersRepository } from '@authrepositories/repositories/auth.repository';
 import { UsersService } from '@authServices/auth.service';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from '@common/constants';
+import { jwtConstants } from '@common/security/constants';
 
 @Module({
   imports: [

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { TypeORMExceptionFilter } from './app/common/typeorm-exceptions.filter';
+import { TypeORMExceptionFilter } from './app/common/exception/typeorm-exceptions.filter';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {

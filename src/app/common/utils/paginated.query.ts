@@ -13,12 +13,16 @@ export enum Order {
 	DESC = 'desc'
 }
 
+// add pagination ti the search
 export class PaginatedQuery {
+
+  // search order
   @ApiPropertyOptional({ enum: Order, default: Order.ASC })
   @IsEnum(Order)
   @IsOptional()
   readonly order? = Order.ASC;
 
+  // current page
   @ApiPropertyOptional({
     minimum: 1,
     default: 1,
@@ -27,6 +31,7 @@ export class PaginatedQuery {
   @IsOptional()
   readonly page?: number = 1;
 
+  // limit of records per search
   @ApiPropertyOptional({
     minimum: 1,
     default: 100,

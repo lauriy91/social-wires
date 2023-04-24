@@ -16,6 +16,10 @@
 
 [![signin.png](https://i.postimg.cc/Kc17gZNf/signin.png)](https://postimg.cc/9zjw6Hsw)
 
+<h> Logout... </h>
+
+[![logout.png](https://i.postimg.cc/J0Bq7KsG/logout.png)](https://postimg.cc/q64njsXT)
+
 <h> Get users (For admin)... </h>
 
 [![getusers.png](https://i.postimg.cc/FKJmLkYm/getusers.png)](https://postimg.cc/1gPLxt0Y)
@@ -30,12 +34,12 @@
 
 <h1>Enviroment Variables</h1>
 
-<li>POSTGRES_PORT_EXTERNAL=****</li>
-<li>DB_USER=****</li>
-<li>DB_PASS=****</li>
-<li>DB_NAME=****</li>
+<li>POSTGRES_PORT_EXTERNAL=5432</li>
+<li>DB_USER=nest</li>
+<li>DB_PASS=nest</li>
+<li>DB_NAME=nest</li>
 <li>DB_HOST=localhost</li>
-<li>DB_PORT=5431</li>
+<li>DB_PORT=5432</li>
 <li>DB_SYNC=false</li>
 
 <h1>Installing and running</h1>
